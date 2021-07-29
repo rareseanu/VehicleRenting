@@ -1,6 +1,8 @@
 package com.renting.models;
 
-public class Vehicle {
+import java.io.Serializable;
+
+public class Vehicle implements Serializable {
     private String registrationNumber;
     private VehicleType type;
     private int manufacturingYear;

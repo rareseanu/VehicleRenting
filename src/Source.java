@@ -1,33 +1,26 @@
 import com.renting.models.Person;
 import com.renting.models.Vehicle;
 import com.renting.models.VehicleType;
-import com.renting.persistence.PersonDao;
-import com.renting.persistence.VehicleDao;
+import com.renting.persistence.*;
 import com.renting.services.PersonService;
 import com.renting.services.VehicleService;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 
 public class Source {
 
     public static void main(String[] args) {
-        PersonDao personDao = new PersonDao();
+        // Homework 4 - IO
+
+        PersonDao personDao = new FilePersonDao("persons.txt");
         PersonService personService = new PersonService(personDao);
 
-        personService.addPerson(new Person("5010728087752", "Popescu", "Silviu",
-                "Male", LocalDate.of(2001, 7, 28),
-                LocalDate.of(2021, 7, 25)));
-        personService.addPerson(new Person("1920731086333", "Alexandrescu", "Maria",
-                "Female", LocalDate.of(1992, 7, 31),
-                LocalDate.of(2015, 5, 12)));
-
-        VehicleDao vehicleDao = new VehicleDao();
+        VehicleDao vehicleDao = new FileVehicleDao("vehicles.txt");
         VehicleService vehicleService = new VehicleService(vehicleDao);
-
-        vehicleService.addVehicle(new Vehicle("BV-123-ABC", VehicleType.SEDAN, 2019,
-                "Passat", "Black"));
-        vehicleService.addVehicle( new Vehicle("BV-12-BCD", VehicleType.SUV, 2018,
-                "Peugeot", "Silver"));
 
         System.out.println("-----VEHICLES-----");
         for(Vehicle vehicle : vehicleService.getAllVehicles()) {
@@ -48,5 +41,7 @@ public class Source {
         for(Vehicle vehicle : vehicleService.getVehiclesByType(VehicleType.SEDAN)) {
             System.out.println(vehicle);
         }
+
+
     }
 }

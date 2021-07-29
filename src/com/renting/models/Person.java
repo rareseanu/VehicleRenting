@@ -1,8 +1,9 @@
 package com.renting.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Person {
+public class Person implements Serializable {
     private String personalIdNumber;
     private String firstName;
     private String lastName;
